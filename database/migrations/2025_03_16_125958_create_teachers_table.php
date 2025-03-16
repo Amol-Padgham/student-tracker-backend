@@ -1,10 +1,10 @@
 <?php
- 
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
- 
-class CreateComponentsTable extends Migration
+
+class CreateTeachersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateComponentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('components', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('assignment_id');
-            $table->integer('max_marks');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamps();
-   
-            $table->foreign('assignment_id')->references('id')->on('assignments')->onDelete('cascade');
         });
     }
-   
- 
+
     /**
      * Reverse the migrations.
      *
@@ -32,6 +29,6 @@ class CreateComponentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('components');
+        Schema::dropIfExists('teachers');
     }
 }
