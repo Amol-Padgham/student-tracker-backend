@@ -14,23 +14,29 @@ class Teacher extends Authenticatable
 
     protected $fillable = ['name', 'email', 'password'];
 
-    protected $hidden = ['password'];
+    // protected $hidden = ['password'];
 
     /**
      * Automatically hash the password when creating or updating a teacher.
      */
-    protected static function boot()
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::creating(function ($teacher) {
+    //         $teacher->password = Hash::make($teacher->password);
+    //     });
+
+    //     static::updating(function ($teacher) {
+    //         if ($teacher->isDirty('password')) {
+    //             $teacher->password = Hash::make($teacher->password);
+    //         }
+    //     });
+    // }
+    public function setPasswordAttribute($password)
     {
-        parent::boot();
-
-        static::creating(function ($teacher) {
-            $teacher->password = Hash::make($teacher->password);
-        });
-
-        static::updating(function ($teacher) {
-            if ($teacher->isDirty('password')) {
-                $teacher->password = Hash::make($teacher->password);
-            }
-        });
+        if (!empty($password) && !Hash::needsRehash($password)) {
+            $this->attributes['password'] = Hash::make($password);
+        }
     }
 }

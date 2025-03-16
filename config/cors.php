@@ -3,7 +3,8 @@
 return [
     'paths' => ['api/*', 'sanctum/csrf-cookie', '*'], // Allow all API routes
     'allowed_methods' => ['*'], // Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
-    'allowed_origins' => ['*'], // Allow all origins (or specify frontend URL)
+    // 'allowed_origins' => ['*'], // Allow all origins (or specify frontend URL)
+    'allowed_origins' => ['http://localhost:5173'],
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'], // Allow all headers
     'exposed_headers' => [],

@@ -5,8 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeacherAuthController;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Teacher;
+use App\Http\Controllers\AuthController;
 
-
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\MarkController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,13 +21,16 @@ use App\Models\Teacher;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/user', [AuthController::class, 'user']);
 });
 
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\AssignmentController;
-use App\Http\Controllers\MarkController;
 
 Route::get('/students', [StudentController::class, 'index']);
 Route::post('/students', [StudentController::class, 'store']);
