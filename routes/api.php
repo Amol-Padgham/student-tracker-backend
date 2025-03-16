@@ -25,6 +25,7 @@ use App\Http\Controllers\MarkController;
 //     return $request->user();
 // });
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
